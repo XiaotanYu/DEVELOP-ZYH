@@ -389,7 +389,7 @@ class DenseGGNNChemModel(ChemModel):
                                            weights['cnn_biases_2'], data_format='NCDHW'))
             pool2 = tf.reduce_max(conv2, axis=[2, 3, 4])
     
-            flat = tf.layers.flatten(pool2, data_format='channels_first')
+            flat = tf.layers.flatten(pool2, data_format='channels_last')
             flat = tf.nn.dropout(flat, rate=0.2)
             dense = tf.matmul(flat, weights['cnn_linear'])
         return dense
